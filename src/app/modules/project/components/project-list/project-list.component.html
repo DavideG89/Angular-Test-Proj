@@ -1,0 +1,25 @@
+<div class="row row-cols-1 row-cols-md-2 g-4" *ngIf="projects.length > 0; else noProject" >
+  <div class="col" *ngFor= "let project of projects; let i=index" >
+      <div class="card" [ngClass]="{'border-info' : project.done, 'border-warning' : !project.done}">
+          <div class="card-body">
+              <h5 class="card-title">
+                  <span class="badge bg-secondary rounded-pill">{{ project.code}} </span>
+                  {{ project.name }} {{i}}
+              </h5>
+              <p class="card-text">{{ project.description }}</p>
+
+              <button (click)="select(project)" class="btn btn-primary btn-sm ">Vai al Progetto</button>
+              <!-- <button [disabled]="project.done" class="btn btn-primary btn-sm ">Vai al Progetto</button> -->
+            </div>
+          <div class="card-footer">
+              <small class="text-muted" [ngStyle]="{'font-style' : project.done ? 'normal' : 'italic'}" >
+                  <span>{{ project.start | date: 'dd/MM/yyy' | titlecase }}</span>
+                  <span *ngIf="project.end | date: 'dd/MM/yyy'"> | {{ project.end }}</span>
+              </small>
+          </div>
+      </div>
+  </div>
+</div>
+<ng-template #noProject>
+<p>Nessun Progetto al momento</p>
+</ng-template>

@@ -1,0 +1,13 @@
+<app-section-header [title]="'I miei Progetti'" [button]="{label: 'vai alla Dashboard', link:'/home' }">
+</app-section-header>
+<ng-container *ngIf="projects$ | async as projects">
+  <app-project-list [projects]="projects" (selected)="selectProject($event)"></app-project-list>
+</ng-container>
+<!-- aggiungiamo un template -->
+
+
+ <ng-template #noProject>
+<p>Nessun Progetto al momento</p>
+</ng-template>
+<app-project-form (submitted)="submitProject($event)"></app-project-form>
+
